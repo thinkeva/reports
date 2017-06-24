@@ -262,8 +262,6 @@
 
 <section id="o-que-esta-acontecendo" class="nav-item">
 
-
-
   <div class="parallax">
     <h2>
       O que está acontecendo com
@@ -779,7 +777,8 @@
 
   <div class="carrossel carrossel-01">
 
-      <div class="carrossel-slide" style="background-image: url(/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-Skol.jpg);">
+      <div class="carrossel-slide">
+        <img src="/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-Skol.jpg" alt="Skol">
         <div class="slide-info">
             <div class="slide-action"></div>
             <p class="title">Skol</p>
@@ -788,7 +787,8 @@
         </div>
       </div>
 
-      <div class="carrossel-slide" style="background-image: url(/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-ProteinWord.jpg);">
+      <div class="carrossel-slide">
+        <img src="/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-ProteinWord.jpg" alt="Protein World">
         <div class="slide-info">
             <div class="slide-action"></div>
             <p class="title">Protein World</p>
@@ -797,7 +797,8 @@
         </div>
       </div>
 
-      <div class="carrossel-slide" style="background-image: url(/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-VictoriaSecrets.jpg);">
+      <div class="carrossel-slide">
+        <img src="/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-VictoriaSecrets.jpg" alt="Victoria's Secret">
         <div class="slide-info">
             <div class="slide-action"></div>
             <p class="title">Victoria's Secret</p>
@@ -806,7 +807,8 @@
         </div>
       </div>
 
-      <div class="carrossel-slide" style="background-image: url(/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-BurgerKing.jpg);">
+      <div class="carrossel-slide">
+        <img src="/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-BurgerKing.jpg" alt="Burger King">
         <div class="slide-info">
             <div class="slide-action"></div>
             <p class="title">Burger King</p>
@@ -815,7 +817,8 @@
         </div>
       </div>
 
-      <div class="carrossel-slide" style="background-image: url(/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-TomFord.jpg);">
+      <div class="carrossel-slide">
+        <img src="/feminismo-compromisso-inegociavel/assets/images/carroussel01/1Carrossel-TomFord.jpg" alt="Tom Ford">
         <div class="slide-info">
             <div class="slide-action"></div>
             <p class="title">Tom Ford</p>
@@ -1508,9 +1511,13 @@ Em 2017 criou sua linha de produtos de beleza com produtos que atendem as mais v
 
       <div class="newsletter">
         <p>Cadastre seu e-mail e receba novidades</p>
-        <form action="https://httpbin.org/post" method="post" class="validate" target="_blank" novalidate>
-          <input type="email" name="EMAIL" placeholder="Preencha seu email" required/>
-          <input class="button" type="submit" value="enviar" name="subscribe">
+        <form id="mailchimp" action="https://thinkeva.us16.list-manage.com/subscribe/post" method="POST" class="validate" target="_blank" validate>
+          <input type="hidden" name="u" value="f7c34b96fe348c6b0c90126ac">
+          <input type="hidden" name="id" value="3ec8bd4641">
+          <input type="email" placeholder="Preencha seu email" autocapitalize="off" autocorrect="off" name="MERGE0" id="MERGE0" size="25" value="">
+          <input class="button" type="submit" value="enviar" name="submit">
+          <input type="hidden" name="ht" value="b7fcc0ed58fa2d358d816bec90352c9cee7fa1fc:MTQ5ODMzMTA3My4zNzQy">
+          <input type="hidden" name="mc_signupsource" value="hosted">
         </form>
       </div>
 

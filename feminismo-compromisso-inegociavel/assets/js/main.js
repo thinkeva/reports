@@ -45,27 +45,14 @@ $(document).ready(function(){
       var screenHeight = window.innerHeight;
       var elementOffset = $('.mundo').offset().top;
       var currentElementOffset = (elementOffset - scrollTop);
-      console.log('screenHeight', screenHeight);
-      // console.log(currentElementOffset);
-      if (screenHeight * 0.7 > currentElementOffset) {
-          $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight +'px, 0)');
-          $('.mulheres').css('clip', 'rect(' + mundoHeight +'px, auto , auto, 0)');
-          if (screenHeight * 0.6 > currentElementOffset) {
-              $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight*0.75 +'px, 0)');
-              $('.mulheres').css('clip', 'rect(' + mundoHeight*0.75 +'px, auto, auto, 0)');
-              if (screenHeight * 0.5 > currentElementOffset) {
-                  $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight*0.5 +'px, 0)');
-                  $('.mulheres').css('clip', 'rect(' + mundoHeight*0.5 +'px, auto, auto, 0)');
-                  if (screenHeight * 0.4 > currentElementOffset) {
-                      $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight*0.25 +'px, 0)');
-                      $('.mulheres').css('clip', 'rect(' + mundoHeight*0.25 +'px, auto, auto, 0)');
-                      if (screenHeight * 0.3 > currentElementOffset) {
-                          $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight*0.0 +'px, 0)');
-                          $('.mulheres').css('clip', 'rect(' + mundoHeight*0.0 +'px, auto, auto, 0)');
-                      }
-                  }
-              }
-          }
+
+      if (screenHeight * 0.2 > currentElementOffset) {
+          $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight*0.0 +'px, 0)');
+          $('.mulheres').css('clip', 'rect(' + mundoHeight*0.0 +'px, auto, auto, 0)');
+      } else if (screenHeight * 0.8 > currentElementOffset) {
+          var percentage = ((currentElementOffset * 160 / screenHeight * 0.2) * 5 - 20) * 0.01;
+          $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight * percentage +'px, 0)');
+          $('.mulheres').css('clip', 'rect(' + mundoHeight * percentage +'px, auto , auto, 0)');
       } else {
         $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight +'px, 0)');
         $('.mulheres').css('clip', 'rect(' + mundoHeight +'px, auto , auto, 0)');
@@ -306,6 +293,13 @@ $(document).ready(function(){
         $('.info-04 button').addClass('slick-next');
       }
     );
+
+
+    // Mailchimp Submit
+    $('#mailchimp').submit(function(e) {
+      $('#mailchimp .button').val( 'enviado' );
+      $('#mailchimp .button').addClass('sent');
+    });
 
 
 
