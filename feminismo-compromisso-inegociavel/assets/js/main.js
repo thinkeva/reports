@@ -15,8 +15,8 @@ $(document).ready(function(){
     // SOCIAL SHARE POP UP
     $('.social-icons a').click(function(e) {
       e.preventDefault();
-    	var winWidth = 520,
-    		winHeight = 320,
+    	var winWidth = 820,
+    		winHeight = 520,
         winTop = (screen.height / 2) - (winHeight / 2),
         winLeft = (screen.width / 2) - (winWidth / 2);
 
@@ -46,13 +46,13 @@ $(document).ready(function(){
       var elementOffset = $('.mundo').offset().top;
       var currentElementOffset = (elementOffset - scrollTop);
 
-      if (screenHeight * 0.2 > currentElementOffset) {
+      if (screenHeight * 0.5 > currentElementOffset) {
           $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight*0.0 +'px, 0)');
           $('.mulheres').css('clip', 'rect(' + mundoHeight*0.0 +'px, auto, auto, 0)');
-      } else if (screenHeight * 0.8 > currentElementOffset) {
-          var percentage = ((currentElementOffset * 160 / screenHeight * 0.2) * 5 - 20) * 0.01;
-          $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight * percentage +'px, 0)');
-          $('.mulheres').css('clip', 'rect(' + mundoHeight * percentage +'px, auto , auto, 0)');
+      // } else if (screenHeight * 0.5 > currentElementOffset) {
+      //     var percentage = ((currentElementOffset * 160 / screenHeight * 0.2) * 5 - 20) * 0.01;
+      //     $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight * percentage +'px, 0)');
+      //     $('.mulheres').css('clip', 'rect(' + mundoHeight * percentage +'px, auto , auto, 0)');
       } else {
         $('.mundo').css('clip', 'rect(0, auto, ' + mundoHeight +'px, 0)');
         $('.mulheres').css('clip', 'rect(' + mundoHeight +'px, auto , auto, 0)');
@@ -66,7 +66,10 @@ $(document).ready(function(){
     var coverPlayer = $('#cover-video');
 
     if (screen.width > 576) {
-      coverPlayer[0].src = 'assets/video/think_eva-reports-TOP_ANIMATION_DESK.mp4';
+      console.log(coverPlayer);
+      coverPlayer[0].poster = 'assets/video/think_eva-reports-desktop.jpg';
+      coverPlayer[0].children[0].src = 'assets/video/think_eva-reports-desktop.mp4';
+      coverPlayer[0].children[1].src = 'assets/video/think_eva-reports-desktop.ogg';
       coverPlayer[0].load();
     } else {
       window.enableInlineVideo(coverPlayer[0], {everywhere: true});
@@ -284,13 +287,13 @@ $(document).ready(function(){
     $('.info-04-slide-2').hover(
       function(e) {
         $('.info-04').addClass('focus');
-        $('.info-04 button').addClass('slick-prev');
-        $('.info-04 button').removeClass('slick-next');
+        // $('.info-04 button').addClass('slick-prev');
+        // $('.info-04 button').removeClass('slick-next');
       },
       function(e) {
         $('.info-04').removeClass('focus');
-        $('.info-04 button').removeClass('slick-prev');
-        $('.info-04 button').addClass('slick-next');
+        // $('.info-04 button').removeClass('slick-prev');
+        // $('.info-04 button').addClass('slick-next');
       }
     );
 
@@ -304,6 +307,13 @@ $(document).ready(function(){
 
 
     $('.lazyYT').lazyYT();
+
+    // SCROLL TOP
+    $(".scroll-top").click(function(e) {
+	    e.preventDefault();
+      $('html,body').animate({ scrollTop: 0 }, 'slow');
+      $('.mobile-menu').removeClass('active');
+  	});
 
     // SCROLL TO
     $(".bullet-nav li").click(function(e) {
@@ -328,5 +338,9 @@ $(document).ready(function(){
         }
       });
     });
+
+    var firstSection = "o-que-esta-acontecendo";
+    $("#link-" + firstSection + "-mobile").addClass('active');
+    $("#link-" + firstSection).addClass('active');
 
 });
