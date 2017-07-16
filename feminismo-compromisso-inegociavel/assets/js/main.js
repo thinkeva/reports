@@ -67,9 +67,9 @@ $(document).ready(function(){
 
     if (screen.width > 576) {
       console.log(coverPlayer);
-      coverPlayer[0].poster = '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-desktop.jpg';
-      coverPlayer[0].children[0].src = '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-desktop.mp4';
-      coverPlayer[0].children[1].src = '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-desktop.ogg';
+      coverPlayer[0].poster = 'assets/video/think_eva-reports-desktop.jpg';
+      coverPlayer[0].children[0].src = 'assets/video/think_eva-reports-desktop.mp4';
+      coverPlayer[0].children[1].src = 'assets/video/think_eva-reports-desktop.ogg';
       coverPlayer[0].load();
     } else {
       window.enableInlineVideo(coverPlayer[0], {everywhere: true});
