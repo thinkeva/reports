@@ -66,7 +66,6 @@ $(document).ready(function(){
     var coverPlayer = $('#cover-video');
 
     if (screen.width > 576) {
-      console.log(coverPlayer);
       coverPlayer[0].poster = '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-desktop.jpg';
       coverPlayer[0].children[0].src = '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-desktop.mp4';
       coverPlayer[0].children[1].src = '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-desktop.ogg';
@@ -130,14 +129,10 @@ $(document).ready(function(){
     });
 
     var stWidth = $('.carrossel-02 .slick-slide').width();
-    console.log(stWidth);
-    console.log($('.carrossel-02 .slick-slide'));
     $('.carrossel-02 .slick-slide').css('height',stWidth + 'px' );
 
     $('.carrossel-02').on('afterChange beforeChange init', function(event, slick, currentSlideIndex, nextSlideIndex){
       var stWidth = $('.carrossel-02 .slick-slide').width();
-      console.log(stWidth);
-      console.log($('.carrossel-02 .slick-slide'));
       $('.carrossel-02 .slick-slide').css('height',stWidth + 'px' );
     });
 
@@ -231,9 +226,14 @@ $(document).ready(function(){
       var currentSlide = slick.$slides[currentSlideIndex];
       var dotsOffset = slick.$dots["0"].offsetLeft;
       var nextSlideDotsOffset = slick.$dots["0"].children[nextSlideIndex].offsetLeft;
+      var offsetScreen = window.innerWidth < 768 ? 40 : 140;
 
-      if (nextSlideDotsOffset > (dotsOffset / 2) - 140) {
+      if ((nextSlideDotsOffset > (dotsOffset / 2) - 140 && window.innerWidth > 768)) {
         var leftOffset = (dotsOffset / 2) - nextSlideDotsOffset - 70;
+        if ($('#timelineStyle')) { $('#timelineStyle').remove() }
+        $( "<style id='timelineStyle'>.timeline .slick-dots li { transform: translateX(" + leftOffset + "px); }</style>" ).insertBefore( ".timeline" );
+      } else if (nextSlideDotsOffset > (window.innerWidth / 2)) {
+        var leftOffset = (window.innerWidth / 2) - nextSlideDotsOffset - 20;
         if ($('#timelineStyle')) { $('#timelineStyle').remove() }
         $( "<style id='timelineStyle'>.timeline .slick-dots li { transform: translateX(" + leftOffset + "px); }</style>" ).insertBefore( ".timeline" );
       }
