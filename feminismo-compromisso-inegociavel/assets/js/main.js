@@ -158,6 +158,16 @@ $(document).ready(function(){
     })
 
 
+    // REFS
+    $('.refs').click(function(e){
+      $('#refs').toggleClass('active');
+      if ($('#refs').hasClass('active')) {
+        var offset = $('#refs').offset().top - 60;
+        $('html,body').animate({ scrollTop: offset }, 'slow');
+      }
+    })
+
+
 
     //TIMELINE
     $('.timeline-nav').slick({
