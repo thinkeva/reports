@@ -129,6 +129,18 @@ $(document).ready(function(){
       ]
     });
 
+    var stWidth = $('.carrossel-02 .slick-slide').width();
+    console.log(stWidth);
+    console.log($('.carrossel-02 .slick-slide'));
+    $('.carrossel-02 .slick-slide').css('height',stWidth + 'px' );
+
+    $('.carrossel-02').on('afterChange beforeChange init', function(event, slick, currentSlideIndex, nextSlideIndex){
+      var stWidth = $('.carrossel-02 .slick-slide').width();
+      console.log(stWidth);
+      console.log($('.carrossel-02 .slick-slide'));
+      $('.carrossel-02 .slick-slide').css('height',stWidth + 'px' );
+    });
+
     $('.carrossel-03').slick({
       dots: true,
       infinite: true,
@@ -268,6 +280,7 @@ $(document).ready(function(){
       arrows: false,
       slidesToShow: 2,
       slidesToScroll: 1,
+      focusOnSelect: true,
       responsive: [
         {
           breakpoint: 768,
@@ -311,6 +324,9 @@ $(document).ready(function(){
       $('html,body').animate({ scrollTop: 0 }, 'slow');
       $('.mobile-menu').removeClass('active');
   	});
+    $(".link-menu li").click(function(e) {
+      $('.mobile-menu').removeClass('active');
+  	});
 
     // SCROLL TO
     $(".bullet-nav li").click(function(e) {
@@ -336,7 +352,7 @@ $(document).ready(function(){
       });
     });
 
-    var firstSection = "o-que-esta-acontecendo";
+    var firstSection = "cover";
     if ($(window).scrollTop() < 100) {
       $("#link-" + firstSection + "-mobile").addClass('active');
       $("#link-" + firstSection).addClass('active');
