@@ -155,6 +155,19 @@ $(document).ready(function(){
       ]
     });
 
+    $('.carrossel-03').on('beforeChange', function(event, slick, currentSlideIndex, nextSlideIndex){
+      var nextSlide = slick.$slides[nextSlideIndex];
+      var currentSlide = slick.$slides[currentSlideIndex];
+      autoPlay(nextSlide.children["0"]);
+      stopPlay(currentSlide.children["0"]);
+
+    });
+
+    $('.carrossel-03 .slick-active').click(function(e) {
+      console.log(e);
+      e.stopPropagation();
+    })
+
     $('.slide-action').click(function(e){
       $(this).parent().toggleClass('active');
       $(this).parent().parent().parent().parent().parent().toggleClass('info-active');
@@ -178,7 +191,7 @@ $(document).ready(function(){
 
     //TIMELINE
     $('.timeline-nav').slick({
-      slidesToShow: 10,
+      slidesToShow: 8,
       slidesToScroll: 1,
       centerMode: true,
       infinite: false,
@@ -186,9 +199,16 @@ $(document).ready(function(){
       asNavFor: '.timeline-content',
       responsive: [
         {
-          breakpoint: 768,
+          breakpoint: 992,
           settings: {
             slidesToShow: 5,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 3,
             slidesToScroll: 1
           }
         },
@@ -238,8 +258,41 @@ $(document).ready(function(){
         $( "<style id='timelineStyle'>.timeline .slick-dots li { transform: translateX(" + leftOffset + "px); }</style>" ).insertBefore( ".timeline" );
       }
 
+      if (nextSlide.classList["0"] == "video-content") autoPlay(nextSlide.children["0"].children["0"]);
+      if (currentSlide.classList["0"] == "video-content") stopPlay(currentSlide.children["0"].children["0"]);
+
     });
 
+    function autoPlay(videoSlide) {
+      console.log('videoSlide', videoSlide);
+      var playButton = videoSlide.children["0"].children["0"];
+      $(playButton).trigger("play");
+    }
+
+    function stopPlay(currentSlideIframe) {
+      console.log('currentSlideIframe', currentSlideIframe);
+      currentSlideIframe.children["0"].remove();
+      $(currentSlideIframe).removeClass( "lazyYT-container lazyYT-video-loaded" );
+      $(currentSlideIframe).lazyYT();
+    }
+
+
+    //INFO 01
+    var info01item = $('.info-01 .item');
+    var initialCount = 1;
+    var timing = 1500;
+
+    function changeItem() {
+      if (initialCount > 7) { initialCount = 0; previousCount = 7; }
+      else { previousCount = initialCount - 1; }
+      $(info01item[previousCount]).removeClass('active');
+      $(info01item[initialCount]).addClass('active');
+      initialCount++;
+    }
+
+    $(info01item[0]).addClass('active');
+    setInterval(changeItem, timing);
+    setTimeout(function () { timing = 1000 }, 10500);
 
 
     //INFO 02
