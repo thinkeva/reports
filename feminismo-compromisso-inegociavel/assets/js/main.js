@@ -84,8 +84,9 @@ $(document).ready(function(){
       overlay.addClass('transparent');
       // overlay.css('height', cov    erPlayer[0].clientHeight + "px" );
     });
-    coverPlayer.on('ended', function () {
-      // overlay.css('height', coverPlayer[0].clientHeight + "px" );
+    coverPlayer.bind('pause ended', function () {
+      // let overlayBg = screen.width > 576 ? '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-desktop.jpg' : '/feminismo-compromisso-inegociavel/assets/video/think_eva-reports-mobile.jpg';
+      // overlay.css('background-image', overlayBg );
       overlay.removeClass('transparent');
     });
 
@@ -175,6 +176,10 @@ $(document).ready(function(){
 
     $('.nav-menu').click(function(e){
       $('.mobile-menu').toggleClass('active');
+    })
+
+    $('.mosaico-action').click(function(e){
+      $(this).parent().parent().toggleClass('active');
     })
 
 
@@ -296,14 +301,19 @@ $(document).ready(function(){
 
 
     //INFO 02
+    $('.radial-5').addClass('focus');
+
     $('#info-radial > div').hover(
       function(e) {
+        if (e.target.classList["0"] != 'radial-5') { $('.radial-5').removeClass('focus'); };
         $('.' + this.classList["0"]).addClass('focus');
         $('.info-02 .content .tooltips').addClass('focus');
+        if (e.target.classList["0"] == 'radial-1') { $('.info-02 .speech').addClass('active'); };
       },
       function(e) {
         $('.' + this.classList["0"]).removeClass('focus');
         $('.info-02 .content .tooltips').removeClass('focus');
+        if (e.target.classList["0"] == 'radial-1') { $('.info-02 .speech').removeClass('active'); };
       }
     );
 
@@ -327,38 +337,64 @@ $(document).ready(function(){
     );
 
     //INFO04
-    $('.info-04-slide').slick({
+    $('.info-04-title').slick({
       dots: false,
       infinite: false,
       arrows: false,
       slidesToShow: 2,
       slidesToScroll: 1,
       focusOnSelect: true,
+      asNavFor: '.info-04-slide',
       responsive: [
         {
           breakpoint: 768,
           settings: {
-            dots: true,
             slidesToShow: 1,
             slidesToScroll: 1
           }
         }
       ]
     });
+    $('.info-04-slide').slick({
+      dots: true,
+      infinite: false,
+      arrows: false,
+      fade: true,
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      focusOnSelect: true,
+      asNavFor: '.info-04-title',
+    });
+
+    $('.info-04').click(function(e) {
+      clearInterval(info04Animation);
+    });
+
+    $('.info-04 button').click(function(e) {
+      clearInterval(info04Animation);
+      $('.info-04-slide').slick('slickNext');
+    });
+
+    function changeInfo04slide() {
+      $('.info-04-slide').slick('slickNext');
+    }
+
+    var info04Animation = setInterval(changeInfo04slide, 4000);
 
 
-    $('.info-04-slide-2').hover(
-      function(e) {
-        $('.info-04').addClass('focus');
-        // $('.info-04 button').addClass('slick-prev');
-        // $('.info-04 button').removeClass('slick-next');
-      },
-      function(e) {
-        $('.info-04').removeClass('focus');
-        // $('.info-04 button').removeClass('slick-prev');
-        // $('.info-04 button').addClass('slick-next');
-      }
-    );
+    // $('.info-04-slide-2').hover(
+    //   function(e) {
+    //     $('.info-04').addClass('focus');
+    //     // $('.info-04 button').addClass('slick-prev');
+    //     // $('.info-04 button').removeClass('slick-next');
+    //   },
+    //   function(e) {
+    //     $('.info-04').removeClass('focus');
+    //     // $('.info-04 button').removeClass('slick-prev');
+    //     // $('.info-04 button').addClass('slick-next');
+    //   }
+    // );
 
 
     // Mailchimp Submit
