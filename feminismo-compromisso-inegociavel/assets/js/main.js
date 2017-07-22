@@ -344,16 +344,7 @@ $(document).ready(function(){
       slidesToShow: 2,
       slidesToScroll: 1,
       focusOnSelect: true,
-      asNavFor: '.info-04-slide',
-      responsive: [
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
+      asNavFor: '.info-04-slide'
     });
     $('.info-04-slide').slick({
       dots: true,
