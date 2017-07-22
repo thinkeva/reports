@@ -288,7 +288,7 @@ $(document).ready(function(){
     var timing = 1500;
 
     function changeItem() {
-      if (initialCount > 7) { initialCount = 0; previousCount = 7; }
+      if (initialCount > 9) { initialCount = 0; previousCount = 9; }
       else { previousCount = initialCount - 1; }
       $(info01item[previousCount]).removeClass('active');
       $(info01item[initialCount]).addClass('active');
