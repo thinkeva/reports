@@ -111,6 +111,12 @@ $(document).ready(function(){
       ]
     });
 
+    $('.carrossel-01').on('beforeChange', function(event, slick, currentSlideIndex, nextSlideIndex){
+      var currentSlide = slick.$slides[currentSlideIndex];
+      $(currentSlide.children[1]).removeClass('active');
+      // console.log(currentSlide);
+    });
+
     $('.carrossel-02').slick({
       dots: true,
       infinite: true,
@@ -127,6 +133,12 @@ $(document).ready(function(){
           }
         }
       ]
+    });
+
+    $('.carrossel-02').on('beforeChange', function(event, slick, currentSlideIndex, nextSlideIndex){
+      var currentSlide = slick.$slides[currentSlideIndex];
+      $(currentSlide.children["0"]).removeClass('active');
+      // console.log(currentSlide);
     });
 
     var stWidth = $('.carrossel-02 .slick-slide').width();
@@ -172,7 +184,7 @@ $(document).ready(function(){
     //   }
     // })
 
-    $('.slide-action').click(function(e){
+    $('body').on('click', '.slide-action', function(e){
       $(this).parent().toggleClass('active');
       $(this).parent().parent().parent().parent().parent().toggleClass('info-active');
     })
@@ -207,21 +219,21 @@ $(document).ready(function(){
       asNavFor: '.timeline-content',
       responsive: [
         {
-          breakpoint: 992,
+          breakpoint: 1200,
           settings: {
-            slidesToShow: 5,
+            slidesToShow: 4,
             slidesToScroll: 1
           }
         },
         {
-          breakpoint: 768,
+          breakpoint: 992,
           settings: {
             slidesToShow: 3,
             slidesToScroll: 1
           }
         },
         {
-          breakpoint: 576,
+          breakpoint: 768,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1
@@ -318,10 +330,22 @@ $(document).ready(function(){
       }
     });
 
+    var Info01Position = $('.info-01').position();
+    var Info01Animation = false;
+    $('.carrossel-03').scrollspy({
+      min: Info01Position.top - 240,
+      max: Info01Position.top + $('.info-01').height(),
+      onEnter: function(element, position) {
+        if (!Info01Animation) {
+          setInterval(changeItem, 700);
+          Info01Animation = true;
+        }
+      }
+    });
+
     //INFO 01
     var info01item = $('.info-01 .item');
     var initialCount = 1;
-    var timing = 1500;
 
     function changeItem() {
       if (initialCount > 9) { initialCount = 0; previousCount = 9; }
@@ -332,8 +356,6 @@ $(document).ready(function(){
     }
 
     $(info01item[0]).addClass('active');
-    setInterval(changeItem, timing);
-    setTimeout(function () { timing = 1000 }, 10500);
 
 
     //INFO 02
@@ -357,9 +379,15 @@ $(document).ready(function(){
     //INFO 03
     $('.info-03 .stakeholder').hover(
       function(e) {
+        if (this.classList[1] == 'stakeholder-3' || this.classList[1] == 'stakeholder-4' || this.classList[1] == 'stakeholder-5') {
+          $(this).parent().addClass('all');
+        }
         $(this).parent().addClass('focus');
       },
       function(e) {
+        if (this.classList[1] == 'stakeholder-3' || this.classList[1] == 'stakeholder-4' || this.classList[1] == 'stakeholder-5') {
+          $(this).parent().removeClass('all');
+        }
         $(this).parent().removeClass('focus');
       }
     );
