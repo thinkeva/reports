@@ -421,10 +421,10 @@ $(document).ready(function(){
     );
 
     //INFO04
-    $('.info-04-slide').slick({
-      dots: true,
+    $('.info-04-title').slick({
+      dots: false,
+      infinite: false,
       arrows: false,
-      infinite: true,
       slidesToShow: 2,
       slidesToScroll: 1,
       focusOnSelect: true,
@@ -432,28 +432,44 @@ $(document).ready(function(){
         {
           breakpoint: 768,
           settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
+            asNavFor: '.info-04-slide',
           }
         }
-      ],
+      ]
+    });
+    $('.info-04-slide').slick({
+      dots: true,
+      arrows: false,
+      infinite: true,
+      slidesToShow: 2,
+      focusOnSelect: false,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: true,
+            asNavFor: '.info-04-title',
+          }
+        }
+      ]
     });
 
     $('.info-04').click(function(e) {
-      console.log('clear');
       clearInterval(info04Animation);
+      changeInfo04slide();
     });
 
-    $('.info-04 button').click(function(e) {
-      console.log('click');
-      clearInterval(info04Animation);
-      $('.info-04-slide').slick('slickNext');
-    });
+    // $('.info-04 button').click(function(e) {
+    //   clearInterval(info04Animation);
+    //   changeInfo04slide();
+    // });
 
     function changeInfo04slide() {
       $('.info-04-slide').slick('slickNext');
+      $('.info-04-slide').toggleClass('go-next');
     }
-
     var info04Animation = setInterval(changeInfo04slide, 4000);
 
 
