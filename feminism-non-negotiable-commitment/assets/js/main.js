@@ -94,6 +94,7 @@ $(document).ready(function(){
     // CARROUSSELs
     $('.carrossel-01').slick({
       dots: true,
+      accessibility: true,
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -137,8 +138,12 @@ $(document).ready(function(){
 
     $('.carrossel-02').on('beforeChange', function(event, slick, currentSlideIndex, nextSlideIndex){
       var currentSlide = slick.$slides[currentSlideIndex];
-      $(currentSlide.children["0"]).removeClass('active');
+      // $(currentSlide.children["0"]).removeClass('active');
       // console.log(currentSlide);
+      console.log($(currentSlide.children[1]).hasClass('active'));
+      if ($(currentSlide.children[1]).hasClass('active')) {
+        $(currentSlide.children[1]).removeClass('active');
+      }
     });
 
     var stWidth = $('.carrossel-02 .slick-slide').width();
@@ -185,8 +190,13 @@ $(document).ready(function(){
     // })
 
     $('body').on('click', '.slide-action', function(e){
-      $(this).parent().toggleClass('active');
       $(this).parent().parent().parent().parent().parent().toggleClass('info-active');
+      console.log($(this).parent().hasClass('active'));
+      if ($(this).parent().hasClass('active')) {
+        $(this).parent().removeClass('active');
+      } else {
+        $(this).parent().addClass('active');
+      }
     })
 
     $('.nav-menu').click(function(e){
@@ -215,6 +225,7 @@ $(document).ready(function(){
       slidesToScroll: 1,
       centerMode: true,
       infinite: false,
+      initialSlide: 15,
       focusOnSelect: true,
       asNavFor: '.timeline-content',
       responsive: [
@@ -245,6 +256,7 @@ $(document).ready(function(){
       dots: true,
       slidesToShow: 1,
       slidesToScroll: 1,
+      initialSlide: 15,
       arrows: false,
       fade: true,
       adaptiveHeight: true,
@@ -301,20 +313,28 @@ $(document).ready(function(){
       min: TimelinePosition.top - 360,
       max: TimelinePosition.top + $('.timeline-content').height(),
       onEnter: function(element, position) {
-        console.log('focus');
-        $(this).focus();
-        $(this).select();
         var timelineSlides = $('.timeline-content .slick-track');
         var currentSlideIndex = $('.timeline-content').slick('slickCurrentSlide');
         var currentSlide = $(timelineSlides["0"].children[currentSlideIndex]);
         $(currentSlide).focus();
-        $(currentSlide).select();
       },
       onLeave: function(element, position) {
         var timelineSlides = $('.timeline-content .slick-track');
         var currentSlideIndex = $('.timeline-content').slick('slickCurrentSlide');
         var currentSlide = $(timelineSlides["0"].children[currentSlideIndex]);
         if (currentSlide["0"].classList["0"] == "video-content") stopPlay(currentSlide["0"].children["0"].children["0"]);
+      }
+    });
+
+    var carrossel01Position = $('.carrossel-01').position();
+    $('.carrossel-01').scrollspy({
+      min: carrossel01Position.top - 480,
+      max: carrossel01Position.top + $('.carrossel-01').height(),
+      onEnter: function(element, position) {
+        var carrossel01Slides = $('.carrossel-01 .slick-track');
+        var currentSlideIndex = $('.carrossel-01').slick('slickCurrentSlide');
+        var currentSlide = $(carrossel01Slides["0"].children[currentSlideIndex]);
+        $(currentSlide).focus();
       }
     });
 
@@ -401,32 +421,31 @@ $(document).ready(function(){
     );
 
     //INFO04
-    $('.info-04-title').slick({
-      dots: false,
-      infinite: false,
+    $('.info-04-slide').slick({
+      dots: true,
       arrows: false,
+      infinite: true,
       slidesToShow: 2,
       slidesToScroll: 1,
       focusOnSelect: true,
-      asNavFor: '.info-04-slide'
-    });
-    $('.info-04-slide').slick({
-      dots: true,
-      infinite: false,
-      arrows: false,
-      fade: true,
-      infinite: true,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      focusOnSelect: true,
-      asNavFor: '.info-04-title',
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ],
     });
 
     $('.info-04').click(function(e) {
+      console.log('clear');
       clearInterval(info04Animation);
     });
 
     $('.info-04 button').click(function(e) {
+      console.log('click');
       clearInterval(info04Animation);
       $('.info-04-slide').slick('slickNext');
     });
